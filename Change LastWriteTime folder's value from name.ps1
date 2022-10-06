@@ -4,4 +4,4 @@ $directory.RootFolder = "Desktop"; $directory.ShowNewFolderButton = $false
 
 $directory.ShowDialog() | Out-Null
 
-Get-ChildItem -Path $directory.SelectedPath -Directory -Name <#| Where-Object -Property Length -EQ 10 #> | ForEach-Object {$date = [datetime]::Parse($_.Name); Set-ItemProperty -Path $_.FullName -Name "LastWriteTime" -Value $date}
+Get-ChildItem -Path $directory.SelectedPath -Directory <#| Where-Object -Property Length -EQ 10 #> | ForEach-Object {$date = [datetime]::Parse($_.Name); Set-ItemProperty -Path $_.FullName -Name "LastWriteTime" -Value $date}
