@@ -3,14 +3,14 @@
 - Durata file (tieni conto delle foto) - OK
 
 Rappresentare con tabella e grafici su Excel:
-- Quantit‡†di foto e video registrati per ciascun giorno
+- Quantit√†¬†di foto e video registrati per ciascun giorno
 - Quanto tempo mi sono allenato in ciascun giorno
 - Rappresentare l'aumento della durata degli allenamenti su un grafico 
 
 https://social.technet.microsoft.com/Forums/lync/en-US/bad2dbb1-5deb-48b8-8f8c-45e2b353dba0/how-do-i-get-video-file-duration-in-powershell-script
 
 #Nota: 	Tieni conto che lo script va eseguito con tutti i file in possesso, aggiungi i dati ad un database e controlla eventuali ripetizioni - OK
-	Fa in modo che la propriet‡†"Duration" non sia di tipo String ma Timespan - OK
+	Fa in modo che la propriet√†¬†"Duration" non sia di tipo String ma Timespan - OK
 	Ricorda di esportare in CSV - OK
 	A volte il nome file e la data di modifica non coincidono - OK
 
@@ -31,14 +31,14 @@ $data = @()
 #Acquisisco i nomi file
 $temp = Get-ChildItem -Path $directory.SelectedPath -Recurse -File -Include ("*.mp4", "*.jpg") -Exclude "Preview_*" | Select-Object -Property Name
 $temp = $temp.Name.Replace("-", "") #Rende simili i formati VID_ e QVR_
-#Registro i nomi file nella propriet‡ NomiFile
+#Registro i nomi file nella propriet√† NomiFile
 $temp | ForEach-Object {$data += New-Object -TypeName psobject -Property @{NomeFile = $_}}
 
-$temp = $null #Ripulisco perchÈ inutile
+$temp = $null #Ripulisco perch√© inutile
 $NotSupported = @()
 
 $data | ForEach-Object {#Acquisisco e registro la data di acquisizione
-    Write-Progress -Activity "Acquisendo e registrando dati nella propriet‡ 'TimeFromName'..."
+    Write-Progress -Activity "Acquisendo e registrando dati nella propriet√† 'TimeFromName'..."
     $time = $_.NomeFile
 
     If ($time.StartsWith("IMG_") -or $time.StartsWith("VID_")){
@@ -50,6 +50,12 @@ $data | ForEach-Object {#Acquisisco e registro la data di acquisizione
         $time = ($time[4,5] + "/" + $time[6,7] + "/" + $time[8..11] + "_" + $time[13,14] + ":" + $time[15,16] + ":" + $time[17,18])
         $time = $time -join ""
         $_ | Add-Member -MemberType NoteProperty -Name "TimeFromName" -Value ([datetime]::ParseExact($time, "dd/MM/yyyy_HH:mm:ss", $null))
+	    
+    } ElseIf ($time.StartsWith("WIN_")) {
+        $time = ($time[4..7] + "/" + $time[8,9] + "/" + $time[10,11] + "_" + $time[13,14] + ":" + $time[16,17] + ":" + $time[19,20])
+        $time = $time -join ""
+        $_ | Add-Member -MemberType NoteProperty -Name "TimeFromName" -Value ([datetime]::ParseExact($time, "yyyy/MM/dd_HH:mm:ss", $null))      
+	
     } Else {
         $NotSupported += $time
         $_ | Add-Member -MemberType NoteProperty -Name "TimeFromName" -Value "Struttura non riconosciuta."
@@ -72,7 +78,7 @@ Get-ChildItem -Path $directory.SelectedPath -Recurse -File -Include ("*.mp4", "*
 
 $total = 0
 For ($i = 0; $i -le $data.Count - 1; $i++){
-    Write-Progress -Activity "Registrando dati nella propriet‡ 'Duration'..." -Status ( [string][math]::Round( ((100 / $data.Count) * $i), 2 ) + " completato" ) -PercentComplete ( (100 / $data.Count) * $i )
+    Write-Progress -Activity "Registrando dati nella propriet√† 'Duration'..." -Status ( [string][math]::Round( ((100 / $data.Count) * $i), 2 ) + " completato" ) -PercentComplete ( (100 / $data.Count) * $i )
     If ($Length[$i] -ne ""){$data[$i] | Add-Member -MemberType NoteProperty -Name "Duration" -Value ([timespan]$Length[$i])} 
                       Else {$data[$i] | Add-Member -MemberType NoteProperty -Name "Duration" -Value ([timespan]::Parse("00:00:00"))}
 
