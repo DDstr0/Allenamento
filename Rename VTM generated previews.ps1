@@ -46,7 +46,7 @@ $LogPath = ("$env:USERPROFILE\Desktop" + "\Log di ripristino " + (Get-Date -Form
 For ($i = 0; $i -le $FullNames.Count - 1; $i++){
     Write-Progress -Activity "Controllando e rinominando le preview grid..." -Status ([string]([Math]::Round(($i / $FullNames.Count), 2) * 100) + "% completato.") -PercentComplete (($i / $FullNames.Count) * 100)
 
-    $temp = ($FullNames[$i] + ".jpg") #I nomi file delle preview di Video Thumbnails Maker sono *Nome video* + ".jpg"
+    [string]$temp = ($FullNames[$i] + ".jpg") #I nomi file delle preview di Video Thumbnails Maker sono *Nome video* + ".jpg"
 
     If ( [System.IO.File]::Exists("$temp") ){
         #Rename-Item -Path "$temp" -NewName ($FullNoExt[$i] + "_preview.jpg") @Protection 				#Suffisso
