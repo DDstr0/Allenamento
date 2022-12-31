@@ -9,4 +9,4 @@ Vanno eseguiti in questo ordine:
   4. Rename VTM generated previews.ps1
 
 # Nota bene:
-Ricorda di aggiornare i dati statistici nella tabella: https://docs.google.com/spreadsheets/d/1B_p4gJx1pxio3tCRS_-bJwWlYh7StelN/edit#gid=1197010898
+Ricorda di aggiornare i dati statistici nella tabella: https://docs.google.com/spreadsheets/d/1B_p4gJx1pxio3tCRS_-bJwWlYh7StelN/edit#gid=453407640
