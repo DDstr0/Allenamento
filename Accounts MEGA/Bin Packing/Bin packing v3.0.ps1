@@ -9,7 +9,7 @@ $FolderBrowser.ShowNewFolderButton = $False
 If ($FolderBrowser.ShowDialog() -eq "Cancel"){Write-Warning "Nessuna cartella selezionata"; Exit}
 
 Write-Host ""
-Write-Host "Seleziona l'unit‡† di misura: "
+Write-Host "Seleziona l'unit√†¬† di misura: "
 Write-Host "[1] " -ForegroundColor "Green" -NoNewLine; Write-Host "GB"
 Write-Host "[2] " -ForegroundColor "Green" -NoNewLine; Write-Host "MB"
 Write-Host ""
@@ -34,7 +34,7 @@ If ( (Test-Path -Path ($FolderBrowser.SelectedPath+'\Packs') ) -eq $False){
     New-Item -Path $FolderBrowser.SelectedPath -Name "Packs" -ItemType "Directory" @DebugMode | Out-Null
     Write-Warning ("Cartella 'Packs' creata.")
 } Else {
-    Write-Warning ("Cartella 'Packs' gi‡ esistente.")
+    Write-Warning ("Cartella 'Packs' gi√† esistente.")
 }
 
 $Items = @()
@@ -86,7 +86,7 @@ New-Item -Path ($FolderBrowser.SelectedPath+'\Packs') -ItemType "Directory" -Nam
 Write-Warning ("Nuovo pack '" + $FolderName + "' creato.")
 
 
-    #$Items v‡ forzato ad essere un array, altrimenti l'attributo Count sparisce quando rimane un solo elemento e il ciclo esce senza spostare l'ultimo elemento (lasciando spazio occupabile)
+    #$Items v√† forzato ad essere un array, altrimenti l'attributo Count sparisce quando rimane un solo elemento e il ciclo esce senza spostare l'ultimo elemento (lasciando spazio occupabile)
 Do {$Items = @($Items | Where-Object -Property "Size" -LE $AvailableSpace | Sort-Object -Property "Size" -Descending)
 
     If ($Items.Count -gt 0){ #Altrimenti finisco oltre i limiti della matrice
