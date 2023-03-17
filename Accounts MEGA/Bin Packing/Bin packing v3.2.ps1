@@ -13,7 +13,7 @@ $FolderBrowser.ShowNewFolderButton = $False
 If ($FolderBrowser.ShowDialog() -eq "Cancel"){Write-Warning "Nessuna cartella selezionata"; Exit}
 
 Write-Host ""
-Write-Host "Seleziona l'unit� di misura: "
+Write-Host "Seleziona l'unità  di misura: "
 Write-Host "[1] " -ForegroundColor "Green" -NoNewLine; Write-Host "GB"
 Write-Host "[2] " -ForegroundColor "Green" -NoNewLine; Write-Host "MB"
 Write-Host ""
@@ -43,7 +43,7 @@ If ( (Test-Path -Path ($FolderBrowser.SelectedPath+'\Packs') ) -eq $False){
     New-Item -Path $FolderBrowser.SelectedPath -Name "Packs" -ItemType "Directory" @DebugMode | Out-Null
     If ($?){Write-Warning "Cartella 'Packs' creata."; WriteLog("[!] 'Packs' directory created", "") } Else {Write-Warning "Errore nella creazione della cartella 'Packs'."; Pause}
 } Else {
-    Write-Warning ("Cartella 'Packs' gi� esistente.")
+    Write-Warning ("Cartella 'Packs' già  esistente.")
     WriteLog("[i] 'Packs' directory already exists", "")
 }
 
@@ -102,7 +102,7 @@ Do {$i++
     New-Item -Path ($FolderBrowser.SelectedPath+'\Packs') -Name $FolderName -ItemType "Directory" @DebugMode | Out-Null
     If ($?){Write-Warning ("Nuovo pack '" + $FolderName + "' creato."); WriteLog ("<$FolderName>")}
 
-        #$Items v� forzato ad essere un array, altrimenti l'attributo Count sparisce quando rimane un solo elemento e il ciclo esce senza spostare l'ultimo elemento (lasciando spazio occupabile)
+        #$Items và  forzato ad essere un array, altrimenti l'attributo Count sparisce quando rimane un solo elemento e il ciclo esce senza spostare l'ultimo elemento (lasciando spazio occupabile)
     Do {
         $Items = @($AllItems | Where-Object -Property "Size" -LE $AvailableSpace | Sort-Object -Property "Size" -Descending)
 
@@ -136,4 +136,6 @@ Do {$i++
     Start-Sleep -Seconds 1
 
     Write-Host ""
+    
+    Pause
 } Until ($AllItems.Count -eq 0) #Sostanzialmente, se non ci sono packs che rispettano i criteri, l'operazione si stoppa
