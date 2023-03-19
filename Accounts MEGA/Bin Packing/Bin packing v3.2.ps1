@@ -99,6 +99,12 @@ Do {$i++
 
     #$FolderName = Get-Date -Format "yyyyMMdd_HHmmss"
     $FolderName = [string](Split-Path -Path $FolderBrowser.SelectedPath -Leaf) + ".part$i"
+    If ( Test-Path -Path ($FolderBrowser.SelectedPath+'\Packs\'+"$FolderName") ){
+        Do{
+            $i++
+            $FolderName = [string](Split-Path -Path $FolderBrowser.SelectedPath -Leaf) + ".part$i"
+        } Until ( (Test-Path -Path ($FolderBrowser.SelectedPath+'\Packs\'+"$FolderName")) -eq $False)
+    }
     New-Item -Path ($FolderBrowser.SelectedPath+'\Packs') -Name $FolderName -ItemType "Directory" @DebugMode | Out-Null
     If ($?){Write-Warning ("Nuovo pack '" + $FolderName + "' creato."); WriteLog ("<$FolderName>")}
 
