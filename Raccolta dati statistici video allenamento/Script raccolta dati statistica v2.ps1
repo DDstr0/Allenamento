@@ -92,4 +92,4 @@ $total
 
 $data | Out-GridView -Title 'Output array $data'
 
-If ( (Read-Host -Prompt "Esportare in CSV? [Y/N]").ToLower() -eq "y" ){$data | Export-Csv -Path $env:USERPROFILE\Desktop\Export.csv}
+If ( (Read-Host -Prompt "Esportare in CSV? [Y/N]").ToLower() -eq "y" ){$data | Export-Csv -Path ($directory.SelectedPath + ".csv")}
