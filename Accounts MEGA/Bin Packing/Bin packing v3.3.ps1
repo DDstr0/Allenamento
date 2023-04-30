@@ -34,7 +34,7 @@ Write-Host ""
 
 @(Get-Date -Format "'Session started on' dd/MM/yyyy 'at' HH:mm:ss" 
 "[PATH]: " + $FolderBrowser.SelectedPath
-"[SIZE]: " + [string]$Storage+$Unit) | Out-File -FilePath ($FolderBrowser.SelectedPath+'\Packs\Packs.log') #CREAZIONE/RESET LOG
+"[SIZE]: " + [string]$Storage+$Unit) | Out-File -FilePath ($FolderBrowser.SelectedPath+'\Packs\Packs.log') @DebugMode #CREAZIONE/RESET LOG
 
 $AvailableSpace = [string]$Storage+$Unit #Risultato espresso in Bytes
 
