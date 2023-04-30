@@ -67,7 +67,7 @@ For ($i = 0; $i -le $Folders.Count - 1; $i++){
 $Items = @($Items | Where-Object -Property "Size" -LE $AvailableSpace | Sort-Object -Property "Size" -Descending)
 $Count += @($Items.FullName) #Dopo aver rimosso tutti i file troppo pesanti, unisco la lista completa vecchia a quella attuale
 
-$Count = @($Count | Group-Object | Where-Object -Property "Count" -EQ 1).Name #Conto quali file sono presenti una sola volta
+[array]$Count = @($Count | Group-Object | Where-Object -Property "Count" -EQ 1).Name #Conto quali file sono presenti una sola volta
 
 [System.Collections.ArrayList]$AllItems = @($Items)
 
