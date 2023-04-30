@@ -1,9 +1,9 @@
-Function WriteLog($LogLine){
-    $LogLine | Out-File -FilePath ($FolderBrowser.SelectedPath+'\Packs\Packs.log') -Append
-}
-
 Write-Host "Debug mode? [Y/N]: " -NoNewline -ForegroundColor Green
 If ((Choice -c YN -n) -eq "Y"){Write-Host "Y"; $DebugMode = @{WhatIf = $True}} Else {Write-Host "N"; $DebugMode = @{WhatIf = $False}}
+
+Function WriteLog($LogLine){
+    $LogLine | Out-File -FilePath ($FolderBrowser.SelectedPath+'\Packs\Packs.log') -Append @DebugMode
+}
 
 [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms") | Out-Null
 $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog
