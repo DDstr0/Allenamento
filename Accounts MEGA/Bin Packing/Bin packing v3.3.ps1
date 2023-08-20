@@ -31,7 +31,7 @@ Write-Host ""
 Do {Write-Host "> " -NoNewLine; [float]$Storage = Read-Host} Until ([float]$Storage -gt 0)
 Write-Host ""
 
-New-Item -Path ($FolderBrowser.SelectedPath+'\Packs\Packs.log') @DebugMode | Out-Null
+New-Item -Path ($FolderBrowser.SelectedPath+'\Packs\Packs.log') -Force @DebugMode | Out-Null
 
 @(Get-Date -Format "'Session started on' dd/MM/yyyy 'at' HH:mm:ss" 
 "[PATH]: " + $FolderBrowser.SelectedPath
